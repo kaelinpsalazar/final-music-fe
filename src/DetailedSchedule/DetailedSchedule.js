@@ -6,7 +6,14 @@ function DetailedSchedule() {
   const { userId, scheduleId } = useParams(); 
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
-  
+
+  const formatTime = (timeString) => {
+    const date = new Date(timeString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    return formattedTime;
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/users/${userId}/schedules/${scheduleId}`)
@@ -75,10 +82,11 @@ function DetailedSchedule() {
         {user.first_name} {user.last_name}
       </p>
       <h3>Shows:</h3>
-      <sectio className="showContainer">
+      <section >
         <ul>
           {shows.map((show) => (
-            <li key={show.id}>
+            <li className='consertClass'
+             key={show.id}>
               <h4>{show.artist}</h4>
         
               <p>Show Details:</p>
@@ -88,12 +96,12 @@ function DetailedSchedule() {
                 onError={(e) => (e.target.src = '/images/default_show_image.jpg')} 
                 />
               <p>Date: {show.date}</p>
-              <p>Time: {show.time}</p>
+              <p>Time: {formatTime(show.time)}</p>
               <button onClick={() => removeShow(show.id)}>Remove Show</button>
             </li>
           ))}
         </ul>
-        </sectio>
+        </section>
     </main>
   );
 }
