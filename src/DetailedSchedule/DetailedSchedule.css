@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Container for the detailed schedule */
+.detailed-schedule-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Schedule details */
+h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-top: 15px;
+}
+
+p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Show list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+/* Show items */
+h4 {
+  font-size: 1.2rem;
+  color: #34495e;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.show-image {
+  max-width: 200px;
+  margin-top: 10px;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Error and loading messages */
+.error-message,
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e74c3c;
+}
+
+.loading-message {
+  color: #f39c12;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .detailed-schedule-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .show-image {
+    max-width: 150px;
+  }
+}
