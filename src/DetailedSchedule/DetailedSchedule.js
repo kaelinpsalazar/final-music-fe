@@ -6,6 +6,7 @@ function DetailedSchedule() {
   const { userId, scheduleId } = useParams(); 
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/users/${userId}/schedules/${scheduleId}`)
@@ -15,12 +16,22 @@ function DetailedSchedule() {
         }
         return response.json();
       })
-      .then((data) => setSchedule(data))
+      .then((data) => {
+        const sortedShows = data.shows.sort((a, b) => {
+          const timeA = new Date(a.time); 
+          const timeB = new Date(b.time); 
+          return timeA - timeB; 
+        });
+
+        setSchedule({ ...data, shows: sortedShows });
+      })
       .catch((error) => {
         console.error("Error fetching schedule:", error);
         setError(error.message);
       });
   }, [scheduleId, userId]);
+
+
 
   const removeShow = (showId) => {
     fetch(`http://localhost:3000/api/v1/users/${userId}/schedules/${scheduleId}/shows/${showId}`, {
@@ -42,6 +53,8 @@ function DetailedSchedule() {
   };
 
 
+  
+
   if (error) {
     return <p>Error loading schedule: {error}</p>;
   }
@@ -53,7 +66,7 @@ function DetailedSchedule() {
   const { schedule: details, shows, user } = schedule;
 
   return (
-    <div>
+    <main>
       <h1>Detailed Music Festival Schedule</h1>
       <h2>{details.title}</h2>
       <p>Date: {details.date}</p>
@@ -62,28 +75,26 @@ function DetailedSchedule() {
         {user.first_name} {user.last_name}
       </p>
       <h3>Shows:</h3>
-      <ul>
-        {shows.map((show) => (
-          <li key={show.id}>
-            <h4>{show.artist}</h4>
-            <img
-              src={`http://localhost:3000${show.artist_image}`}
-              alt={`${show.artist} image`}
-              onError={(e) => (e.target.src = '/images/default_artist_image.jpg')} 
-            />
-            <p>Show Details:</p>
-            <img
-              src={`http://localhost:3000${show.image_url}`}
-              alt={`Show image for ${show.artist}`}
-              onError={(e) => (e.target.src = '/images/default_show_image.jpg')} 
-            />
-            <p>Date: {show.date}</p>
-            <p>Time: {show.time}</p>
-            <button onClick={() => removeShow(show.id)}>Remove Show</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <sectio className="showContainer">
+        <ul>
+          {shows.map((show) => (
+            <li key={show.id}>
+              <h4>{show.artist}</h4>
+        
+              <p>Show Details:</p>
+              <img
+                src={`http://localhost:3000${show.image_url}`}
+                alt={`Show image for ${show.artist}`}
+                onError={(e) => (e.target.src = '/images/default_show_image.jpg')} 
+                />
+              <p>Date: {show.date}</p>
+              <p>Time: {show.time}</p>
+              <button onClick={() => removeShow(show.id)}>Remove Show</button>
+            </li>
+          ))}
+        </ul>
+        </sectio>
+    </main>
   );
 }
 
