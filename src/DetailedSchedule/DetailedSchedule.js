@@ -7,6 +7,7 @@ function DetailedSchedule() {
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const formatTime = (timeString) => {
     return new Date(timeString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -53,7 +54,9 @@ function DetailedSchedule() {
   };
 
 
-  
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  };
 
   if (error) {
     return <p>Error loading schedule: {error}</p>;
@@ -65,6 +68,10 @@ function DetailedSchedule() {
 
   const { schedule: details, shows, user } = schedule;
 
+  const filteredShows = shows.filter((show) =>
+    show.artist.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <main>
       <h1>Detailed Music Festival Schedule</h1>
@@ -75,9 +82,19 @@ function DetailedSchedule() {
         {user.first_name} {user.last_name}
       </p>
       <h3>Shows:</h3>
+      <div className="controls">
+        <label htmlFor="search">Search by Artist:</label>
+        <input
+          id="search"
+          type="text"
+          placeholder="Search by artist name..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        </div>
       <section >
         <ul>
-          {shows.map((show) => (
+        {filteredShows.map((show) => (
             <li className='consertClass'
              key={show.id}>
               <h4>Show Details</h4>

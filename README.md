@@ -3,6 +3,7 @@
 ## Description
 This application is has a functionality focus for admins viewing the details of schedules submitted, the ateendee who created that schedule, and the shows in which they are interested in. Aditionally it allows the admin to edit the users information as needed.
 
+
 ## Features
 - A homepage that lists all the schedules that have been created and are in the system. On this page the admin can choose which schedule they want to see more details of. 
 - A schedule details page to view additional details of what the users personal schedule is. On this page the admin can see the users personal information, a list of cards that contain the shows and show information, and the ability to delete the show from the users itunerary. 

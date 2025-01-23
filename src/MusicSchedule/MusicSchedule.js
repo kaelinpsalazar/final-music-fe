@@ -5,6 +5,8 @@ import "./MusicSchedule.css";
 function MusicSchedule() {
   const [schedules, setSchedules] = useState([]);
   const navigate = useNavigate(); 
+  
+  
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/schedules")
