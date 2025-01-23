@@ -31,14 +31,10 @@ function MusicSchedule() {
               className="schedule-button"
               onClick={() => handleButtonClick(schedule.id, schedule.id)}
             >
-              <img
-                src={schedule.image_url}
-                alt={schedule.title}
-                className="schedule-image"
-              />
               <div className="schedule-text">
                 <h2 className="schedule-title">{schedule.title}</h2>
                 <p className="schedule-date">{schedule.date}</p>
+                <p className="user-id">{schedule.user}</p>
               </div>
             </button>
           ))}

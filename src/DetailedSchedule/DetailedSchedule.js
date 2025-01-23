@@ -6,14 +6,11 @@ function DetailedSchedule() {
   const { userId, scheduleId } = useParams(); 
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const formatTime = (timeString) => {
-    const date = new Date(timeString);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    return formattedTime;
-  }
+    return new Date(timeString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/users/${userId}/schedules/${scheduleId}`)
@@ -24,12 +21,7 @@ function DetailedSchedule() {
         return response.json();
       })
       .then((data) => {
-        const sortedShows = data.shows.sort((a, b) => {
-          const timeA = new Date(a.time); 
-          const timeB = new Date(b.time); 
-          return timeA - timeB; 
-        });
-
+        const sortedShows = data.shows.sort((a, b) => a.time.localeCompare(b.time));
         setSchedule({ ...data, shows: sortedShows });
       })
       .catch((error) => {
@@ -52,6 +44,7 @@ function DetailedSchedule() {
           ...prevSchedule,
           shows: prevSchedule.shows.filter(show => show.id !== showId),
         }));
+        setSuccessMessage("This show has been deleted");
       })
       .catch((error) => {
         console.error("Error removing show:", error);
@@ -77,7 +70,7 @@ function DetailedSchedule() {
       <h1>Detailed Music Festival Schedule</h1>
       <h2>{details.title}</h2>
       <p>Date: {details.date}</p>
-      <h3>Created By:</h3>
+      <h3>Atendee:</h3>
       <p>
         {user.first_name} {user.last_name}
       </p>
@@ -87,21 +80,22 @@ function DetailedSchedule() {
           {shows.map((show) => (
             <li className='consertClass'
              key={show.id}>
-              <h4>{show.artist}</h4>
+              <h4>Show Details</h4>
         
-              <p>Show Details:</p>
+              <p>{show.artist}</p>
               <img
                 src={`http://localhost:3000${show.image_url}`}
                 alt={`Show image for ${show.artist}`}
-                onError={(e) => (e.target.src = '/images/default_show_image.jpg')} 
-                />
+                onError={(e) => (e.target.src = '/images/default_show_image.jpg')}
+              />
               <p>Date: {show.date}</p>
               <p>Time: {formatTime(show.time)}</p>
               <button onClick={() => removeShow(show.id)}>Remove Show</button>
             </li>
           ))}
         </ul>
-        </section>
+        {successMessage && <p>{successMessage}</p>}
+      </section>
     </main>
   );
 }

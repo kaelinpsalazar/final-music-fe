@@ -1,0 +1,40 @@
+{
+  "schedule": {
+      "id": 1,
+      "title": "Louder Than Life: Day 1",
+      "date": "2025-07-10",
+      "created_at": "2025-01-23T14:12:12.637Z",
+      "updated_at": "2025-01-23T14:12:12.637Z"
+  },
+  "shows": [
+      {
+          "id": 1,
+          "artist": "The Rolling Stones",
+          "date": "2025-07-10",
+          "time": "2000-01-01T18:00:00.000Z",
+          "image_url": "/images/Rolling_stones_logo.jpeg",
+          "artist_image_url": "/images/Rolling-Stones-band.webp"
+      },
+      {
+          "id": 2,
+          "artist": "Lady Gaga",
+          "date": "2025-07-10",
+          "time": "2000-01-01T20:00:00.000Z",
+          "image_url": "/images/lady_gaga_image.jpg",
+          "artist_image_url": "/images/Lady_gaga_logo.webp"
+      },
+      {
+          "id": 3,
+          "artist": "Tame Impala",
+          "date": "2025-07-11",
+          "time": "2000-01-01T17:00:00.000Z",
+          "image_url": "/images/tame_impala_band.jpeg",
+          "artist_image_url": "/images/tame_impala_logo.webp"
+      }
+  ],
+  "user": {
+      "id": 1,
+      "first_name": "Alice",
+      "last_name": "Johnson"
+  }
+}

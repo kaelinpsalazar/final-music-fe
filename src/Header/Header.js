@@ -18,7 +18,7 @@ const Header = () => {
           <section className="header-title">
 
             <h1>
-              {mainPage ? "Scheduleing" : "Scheduling Details"}
+              {mainPage ? "Salapalooza Schedules" : "Scheduling Details"}
             </h1>
         
           </section>
