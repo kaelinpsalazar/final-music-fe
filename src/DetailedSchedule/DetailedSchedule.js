@@ -82,10 +82,9 @@ function DetailedSchedule() {
         {user.first_name} {user.last_name}
       </p>
       <h3>Shows:</h3>
-      <div className="controls">
-        <label htmlFor="search">Search by Artist:</label>
+      <div >
+        <label >Search by Artist:</label>
         <input
-          id="search"
           type="text"
           placeholder="Search by artist name..."
           value={searchTerm}
